@@ -1,3 +1,17 @@
-<mat-card class="todo">
-  {{ todo.todo }}
+<mat-card class="todo" (dblclick)="markAsCompleted()">
+  <mat-card-content>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <span [style.text-decoration]="todo.completed ? 'line-through' : ''">{{
+        todo.todo
+      }}</span>
+      <div>
+        <button mat-icon-button (click)="editTodo()">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="deleteTodo()">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-card-content>
 </mat-card>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-export interface ITodo { todo: string; completed: boolean };
+export interface ITodo { id: string | number, todo: string; completed: boolean };
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,7 @@ export interface ITodo { todo: string; completed: boolean };
 })
 export class AppComponent {
 
-  todos: ITodo[] = [];
+  todos: ITodo[] = [{ id: 1, todo: "asdasdasda sadasdasdas", completed: true }];
 
   createTodo(todo: ITodo) {
     this.todos.push(todo);
