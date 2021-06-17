@@ -1,0 +1,19 @@
+<mat-card class="create-container">
+  <form [formGroup]="createTodoForm" (submit)="createTodo()">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field id="create-input" appearance="fill">
+        <mat-label>Create Todo</mat-label>
+        <input
+          matInput
+          placeholder="Lorem epsum ...."
+          formControlName="todo"
+          required
+        />
+        <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
+      </mat-form-field>
+      <button type="submit" [disabled]="!createTodoForm.get('todo')?.valid" id="create-button" mat-raised-button color="primary">
+        Create
+      </button>
+    </div>
+  </form>
+</mat-card>
