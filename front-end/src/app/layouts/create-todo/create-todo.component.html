@@ -1,7 +1,16 @@
 <mat-card class="create-container">
   <form [formGroup]="createTodoForm" (submit)="createTodo()">
-    <div fxLayout="row" fxLayoutAlign="start center">
-      <mat-form-field id="create-input" appearance="fill">
+    <div
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutAlign="start center"
+      fxLayoutAlign.xs="none stretch"
+    >
+      <mat-form-field
+        id="create-input"
+        appearance="fill"
+        fxFlex="80%"
+      >
         <mat-label>Create Todo</mat-label>
         <input
           matInput
@@ -11,8 +20,15 @@
         />
         <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
       </mat-form-field>
-      <button type="submit" [disabled]="!createTodoForm.get('todo')?.valid" id="create-button" mat-raised-button color="primary">
-        {{ editTodo ? 'Update' : 'Create' }}
+      <button
+        type="submit"
+        [disabled]="!createTodoForm.get('todo')?.valid"
+        id="create-button"
+        mat-raised-button
+        color="primary"
+        ngStyle.xs="margin-left: 0px; margin-top: 0px"
+      >
+        {{ editTodo ? "Update" : "Create" }}
       </button>
     </div>
   </form>

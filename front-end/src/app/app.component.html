@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container" fxFlex.xs="100%" style="height: 100%;">
   <app-header></app-header>
-  <div fxLayout="column" class="create-todo" fxLayoutAlign="start">
+  <div fxLayout="column" class="create-todo" ngStyle.xs="padding: 0px 20px" fxLayoutAlign="start">
     <app-create-todo (todo)="createTodo($event)"></app-create-todo>
     <app-todo-list [todos]="todos" (action)="todoAction($event)" *ngIf="todos.length" class="todo-list"></app-todo-list>
   </div>
