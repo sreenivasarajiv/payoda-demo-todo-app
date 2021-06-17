@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ITodo } from 'src/app/app.component';
 import { TodoService } from 'src/app/todo.service';
 
 @Component({
@@ -9,6 +10,8 @@ import { TodoService } from 'src/app/todo.service';
 })
 export class CreateTodoComponent implements OnInit {
   constructor(private fb: FormBuilder, private todoService: TodoService) {}
+
+  editTodo: ITodo | null = null;
 
   createTodoForm!: FormGroup;
   @Output() todo = new EventEmitter();
@@ -21,6 +24,7 @@ export class CreateTodoComponent implements OnInit {
 
     this.todoService.currentEditTodo.subscribe(todo => {
       if(todo) {
+        this.editTodo = todo;
         this.createTodoForm.setValue({ todo: todo.todo, completed: todo.completed })
       }
     })
@@ -28,6 +32,11 @@ export class CreateTodoComponent implements OnInit {
 
   createTodo() {
     const value = { ...this.createTodoForm.value };
+    if(this.editTodo) {
+      // update logic
+      value.id = this.editTodo.id;
+      this.editTodo = null;
+    }
     this.createTodoForm.reset({ todo: '', completed: false });
     this.todo.emit(value);
   }

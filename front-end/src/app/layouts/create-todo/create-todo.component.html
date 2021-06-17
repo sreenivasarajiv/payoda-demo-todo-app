@@ -12,7 +12,7 @@
         <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
       </mat-form-field>
       <button type="submit" [disabled]="!createTodoForm.get('todo')?.valid" id="create-button" mat-raised-button color="primary">
-        Create
+        {{ editTodo ? 'Update' : 'Create' }}
       </button>
     </div>
   </form>

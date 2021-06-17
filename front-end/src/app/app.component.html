@@ -2,6 +2,6 @@
   <app-header></app-header>
   <div fxLayout="column" class="create-todo" fxLayoutAlign="start">
     <app-create-todo (todo)="createTodo($event)"></app-create-todo>
-    <app-todo-list [todos]="todos" *ngIf="todos.length" class="todo-list"></app-todo-list>
+    <app-todo-list [todos]="todos" (action)="todoAction($event)" *ngIf="todos.length" class="todo-list"></app-todo-list>
   </div>
 </div>

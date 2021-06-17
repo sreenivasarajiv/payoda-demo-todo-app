@@ -4,6 +4,7 @@ import { ITodo } from 'src/app/app.component';
 export interface IAction {
   actionType: 'edit' | 'delete';
   id: number | string;
+  todo?: ITodo;
 }
 
 @Component({
@@ -24,7 +25,7 @@ export class TodoComponent implements OnInit {
   }
 
   editTodo() {
-    const action: IAction = { actionType: 'edit', id: this.todo.id };
+    const action: IAction = { actionType: 'edit', id: this.todo.id, todo: this.todo };
     this.action.emit(action);
   }
 

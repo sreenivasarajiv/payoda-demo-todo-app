@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TodoService } from 'src/app/todo.service';
 import { ITodo } from '../../app.component';
 import { IAction } from '../todo/todo.component';
@@ -10,20 +10,24 @@ import { IAction } from '../todo/todo.component';
 })
 export class TodoListComponent implements OnInit {
   @Input() todos!: ITodo[];
+  @Output() action = new EventEmitter();
 
   constructor(private todoService: TodoService) {}
 
   ngOnInit(): void {}
 
   todoAction(action: IAction) {
-    const todo = this.todos.find((t) => t.id === action.id);
-    if (todo) {
-      if (action.actionType === 'edit') {
-        this.todoService.currentEditTodo.next({ ...todo });
-      }
 
-      const index = this.todos.indexOf(todo);
-      this.todos.splice(index, 1);
-    }
+    this.action.emit(action);
+
+    // const todo = this.todos.find((t) => t.id === action.id);
+    // if (todo) {
+    //   if (action.actionType === 'edit') {
+    //     this.todoService.currentEditTodo.next({ ...todo });
+    //   }
+
+    //   const index = this.todos.indexOf(todo);
+    //   this.todos.splice(index, 1);
+    // }
   }
 }
