@@ -23,9 +23,16 @@ async function updateTodos(req, res) {
   return res.json(result);
 }
 
+async function deleteTodos(req, res) {
+  const id = req.params.id;
+  const result = await todosService.deleteTodos(id);
+  return res.json(result);
+}
+
 module.exports = {
   getTodos,
   getTodosById,
   createTodos,
   updateTodos,
+  deleteTodos
 };
