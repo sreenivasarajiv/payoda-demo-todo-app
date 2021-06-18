@@ -8,8 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
-
 // material modules
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
@@ -22,6 +20,7 @@ import { CreateTodoComponent } from './layouts/create-todo/create-todo.component
 import { HeaderComponent } from './layouts/header/header.component';
 import { TodoListComponent } from './layouts/todo-list/todo-list.component';
 import { TodoComponent } from './layouts/todo/todo.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -42,7 +41,8 @@ import { TodoComponent } from './layouts/todo/todo.component';
     MatInputModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],

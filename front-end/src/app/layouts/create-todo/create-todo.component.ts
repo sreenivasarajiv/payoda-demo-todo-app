@@ -34,7 +34,7 @@ export class CreateTodoComponent implements OnInit {
     const value = { ...this.createTodoForm.value };
     if(this.editTodo) {
       // update logic
-      value.id = this.editTodo.id;
+      value.id = this.editTodo._id;
       this.editTodo = null;
     }
     this.createTodoForm.reset({ todo: '', completed: false });

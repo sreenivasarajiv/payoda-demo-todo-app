@@ -1,5 +1,6 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ITodo } from './app.component';
 
 @Injectable({
@@ -8,24 +9,31 @@ import { ITodo } from './app.component';
 export class TodoService {
   currentEditTodo = new BehaviorSubject<ITodo | null>(null);
 
-  constructor() {}
+  constructor(private _api: HttpClient) {}
 
-  private todos: ITodo[] = [{ id: 1, todo: 'Hello World', completed: false }]
+  apiBase = 'http://localhost:3000/todos';
 
-  getTodos(): ITodo[] {
-    return this.todos;
+  getTodos(): Observable<ITodo[]> {
+    return this._api.get(this.apiBase) as Observable<ITodo[]>;
   }
 
   createTodo(todo: ITodo) {
-    this.todos.push({ ...todo, id: Math.random()});
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+    return this._api.post(this.apiBase, JSON.stringify(todo), {
+      headers,
+    }) as Observable<ITodo>;
   }
 
   updateTodo(todo: ITodo) {
-    console.log('update todo', todo.id, todo.todo);
-    this.todos.push(todo);
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+    return this._api.put(this.apiBase + '/' + todo._id, JSON.stringify(todo), {
+      headers,
+    }) as Observable<ITodo>;
   }
 
   deleteTodo(id: string | number) {
-    console.log('delete todo', id);
+    return this._api.delete(this.apiBase + '/' + id) as Observable<ITodo>;
   }
 }

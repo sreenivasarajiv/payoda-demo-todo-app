@@ -3,7 +3,7 @@ import { IAction } from './layouts/todo/todo.component';
 import { TodoService } from './todo.service';
 
 export interface ITodo {
-  id: string | number;
+  _id: string | number;
   todo: string;
   completed: boolean;
 }
@@ -19,24 +19,28 @@ export class AppComponent implements OnInit {
   todos: ITodo[] = [];
 
   createTodo(todo: ITodo) {
-    if (todo.id) {
+    if (todo._id) {
       this.todoService.updateTodo(todo);
     } else {
-      this.todoService.createTodo(todo);
+      this.todoService
+        .createTodo(todo)
+        .subscribe((todo) => this.todos.push(todo));
     }
   }
 
   ngOnInit(): void {
-    this.todos = this.todoService.getTodos();
+    this.todoService.getTodos().subscribe((todos) => (this.todos = todos));
   }
 
   todoAction(action: IAction) {
-    const todo = this.todos.find((t) => t.id === action.id);
+    const todo = this.todos.find((t) => t._id === action.id);
 
     if (action.actionType === 'delete') {
-      this.todoService.deleteTodo(action.id);
-      const index = this.todos.indexOf(todo as ITodo);
-      this.todos.splice(index, 1);
+      this.todoService.deleteTodo(action.id).subscribe((data) => {
+        debugger;
+        const index = this.todos.indexOf(todo as ITodo);
+        this.todos.splice(index, 1);
+      });
     }
 
     if (action.actionType === 'edit') {

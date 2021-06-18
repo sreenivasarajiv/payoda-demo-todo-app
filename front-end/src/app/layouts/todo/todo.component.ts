@@ -25,12 +25,12 @@ export class TodoComponent implements OnInit {
   }
 
   editTodo() {
-    const action: IAction = { actionType: 'edit', id: this.todo.id, todo: this.todo };
+    const action: IAction = { actionType: 'edit', id: this.todo._id, todo: this.todo };
     this.action.emit(action);
   }
 
   deleteTodo() {
-    const action: IAction = { actionType: 'delete', id: this.todo.id };
+    const action: IAction = { actionType: 'delete', id: this.todo._id };
     this.action.emit(action);
   }
 }
