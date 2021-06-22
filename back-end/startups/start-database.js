@@ -2,6 +2,6 @@ const mongoose = require("mongoose");
 
 module.exports = function () {
   mongoose
-    .connect("mongodb://127.0.0.1:27017/payoda-demo")
+    .connect(process.env.DB_CONNECTION_STRING)
     .then(() => console.log("database connected successfully"));
 };
