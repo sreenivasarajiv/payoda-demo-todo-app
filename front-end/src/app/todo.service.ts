@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { ITodo } from './app.component';
 
 @Injectable({
@@ -11,7 +12,7 @@ export class TodoService {
 
   constructor(private _api: HttpClient) {}
 
-  apiBase = 'http://localhost:3000/todos';
+  apiBase = `${environment.apiBaseURL}/todos`;
 
   getTodos(): Observable<ITodo[]> {
     return this._api.get(this.apiBase) as Observable<ITodo[]>;
