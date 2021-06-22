@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ITodo } from 'src/app/app.component';
 
 export interface IAction {
-  actionType: 'edit' | 'delete';
+  actionType: 'edit' | 'delete' | 'completed';
   id: number | string;
   todo?: ITodo;
 }
@@ -22,10 +22,20 @@ export class TodoComponent implements OnInit {
 
   markAsCompleted() {
     this.todo.completed = !this.todo.completed;
+    const action: IAction = {
+      actionType: 'completed',
+      id: this.todo._id,
+      todo: this.todo,
+    };
+    this.action.emit(action);
   }
 
   editTodo() {
-    const action: IAction = { actionType: 'edit', id: this.todo._id, todo: this.todo };
+    const action: IAction = {
+      actionType: 'edit',
+      id: this.todo._id,
+      todo: this.todo,
+    };
     this.action.emit(action);
   }
 

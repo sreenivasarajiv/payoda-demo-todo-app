@@ -5,7 +5,7 @@
         todo.todo
       }}</span>
       <div>
-        <button mat-icon-button (click)="editTodo()">
+        <button *ngIf="!todo.completed" mat-icon-button (click)="editTodo()">
           <mat-icon>edit</mat-icon>
         </button>
         <button mat-icon-button (click)="deleteTodo()">

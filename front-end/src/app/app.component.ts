@@ -20,7 +20,9 @@ export class AppComponent implements OnInit {
 
   createTodo(todo: ITodo) {
     if (todo._id) {
-      this.todoService.updateTodo(todo);
+      this.todoService
+        .updateTodo(todo)
+        .subscribe((todo) => this.todos.push(todo));
     } else {
       this.todoService
         .createTodo(todo)
@@ -37,17 +39,19 @@ export class AppComponent implements OnInit {
 
     if (action.actionType === 'delete') {
       this.todoService.deleteTodo(action.id).subscribe((data) => {
-        debugger;
         const index = this.todos.indexOf(todo as ITodo);
         this.todos.splice(index, 1);
       });
     }
 
     if (action.actionType === 'edit') {
-      this.todoService.updateTodo(todo as ITodo);
       this.todoService.currentEditTodo.next(todo as ITodo);
       const index = this.todos.indexOf(todo as ITodo);
       this.todos.splice(index, 1);
+    }
+
+    if (action.actionType === 'completed') {
+      this.todoService.updateTodo(todo as ITodo).subscribe();
     }
   }
 }

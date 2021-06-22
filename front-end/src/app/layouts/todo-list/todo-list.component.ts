@@ -19,15 +19,6 @@ export class TodoListComponent implements OnInit {
   todoAction(action: IAction) {
 
     this.action.emit(action);
-
-    // const todo = this.todos.find((t) => t.id === action.id);
-    // if (todo) {
-    //   if (action.actionType === 'edit') {
-    //     this.todoService.currentEditTodo.next({ ...todo });
-    //   }
-
-    //   const index = this.todos.indexOf(todo);
-    //   this.todos.splice(index, 1);
-    // }
+    
   }
 }
